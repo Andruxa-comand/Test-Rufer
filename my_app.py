@@ -22,6 +22,7 @@ app = QApplication([])
 main_win = QWidget()
 main_win.show()
 app.exec_()
+*****
 
 
 
