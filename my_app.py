@@ -1,4 +1,5 @@
 from instr import *
+from second_win import *
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 class MainWin(QWidget):
@@ -18,12 +19,22 @@ class MainWin(QWidget):
         self.button = QPushButton(txt_next)
         self.layout = QVBoxLayout()
 
-app = QApplication([])
-main_win = QWidget()
-main_win.show()
-app.exec_()
-*****
+        layout = QVBoxLayout()
+        layout.addWidget(self.hello_text, alignment=Qt.AlignLeft)
+        layout.addWidget(self.instruction, alignment=Qt.AlignLeft)
+        layout.addWidget(self.button, alignment=Qt.AlignCenter)
+        self.setLayout(layout)
 
+    def connects(self):
+        self.button.clicked.connect(self.next_click)
+    def next_click(self):
+        self.hide()
+        self.tw = secondWin()
+    
+
+app = QApplication([])
+main_win = MainWin()
+app.exec_()
 
 
 
