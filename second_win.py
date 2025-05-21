@@ -1,5 +1,5 @@
 from instr import*
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtWidgets import QApplication, QPushButton, QLineEdit, QWidget, QLabel, QVBoxLayout, QHBoxLayout
 from final_win import*
 
@@ -57,13 +57,62 @@ class secondWin(QWidget):
         self.hLay.addLayout(self.lLay)
 
         self.setLayout(self.hLay)  
+    
+    def timer_test(self):
+        global time 
+        time = QTime(0, 1, 0)
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.timer3Event)
+        self.timer.start(1000)
+
+    def timer1Event(self):
+        global time 
+        time = time.addSecs(-1)
+        self.text_timer.setText(time.toString("hh:mm:ss"))
+        self.text_timer.setFont(QFont("Timer", 36, QFont.Bold))
+        self.text_timer.setStyleSheet("color: rgb(0,0,0")
+        if time.toString("hh:mm:ss") == "00:00:00":
+            self.timer.stop()
+
+    def timer_sits(self):
+        global time 
+        time = QTime(0, 0, 30)
+        time = time.addSecs(-1)
+        self.timer.timeout.connect(self.timer2Event)
+        self.timer.start(1500)
+
+    def timer2Event(self):
+        global time 
+        time = time.addSecs(-1)
+        self.text_timer.setText(time.toString("hh:mm:ss")[6:8])
+        self.text_timer.setFont(QFont("Timer", 36, QFont.Bold))
+        self.text_timer.setStyleSheet("color: rgb(0,0,0")
+        if time.toString("hh:mm:ss") == "00:00:00":
+            self.timet.stop()
+
+    def timer_final(self):
+        global time 
+        time = QTime(0, 1, 0)
+        self.timer.timeout.connect(self.timer3Event)
+
+    def timer3Events(self):
+        if int(time.toString("hh:mm:ss")[6:8]) >= 45:
+            self.text_timer.setStyleSheet("color: rgb(0,255,0)")
+        elif int(time.toString("hh:mm:ss")[6:8]) <= 15:
+            self.text_timer.setStyleSheet("color: rgb(0,255,0)")
+        else:
+            self.text_timer.setStyleSheet("color: rgb(0,0,0")
 
     def connets(self):
         self.buttonNext.clicked.connect(self.next_click)
+        self.button1.clicked.connect(self.timer_test)
+        self.button2.clicked.connect(self.timer_sits)
+        self.button3.clicked.connect(self.timer_final)
     
     def next_click(self):
         self.hide()
         self.tw = finalWin()
+
 
 app = QApplication([])
 scndwn = secondWin()
