@@ -21,7 +21,8 @@ class secondWin(QWidget):
     def setAppear(self):
         self.setWindowTitle(txt_title)
         self.resize(win_width, win_height)
-        self.move(win_width, win_height)
+        self.move(win_x, win_y)
+
     def initUI(self): 
         # Данная функция изменена, можно просто скопировать и понять, что изменено)
         self.hLay = QHBoxLayout()
@@ -122,7 +123,6 @@ class secondWin(QWidget):
         else:
             self.text_timer.setStyleSheet("color: rgb(0,0,0")
         self.text_timer.setFont(QFont("Timer", 36, QFont.Bold))
-        self.text_timer.setStyleSheet("color: rgb(0,0,0)")
         if time.toString("hh:mm:ss") == "00:00:00":
             self.timer.stop()
 
